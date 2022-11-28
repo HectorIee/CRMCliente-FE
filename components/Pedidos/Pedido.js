@@ -33,12 +33,7 @@ const Pedido = ({ pedido }) => {
     const { nombre, apellido, telefono, email} = cliente;
 
     // Mutation para cambiar el estatus de un pedido
-    const [actualizarPedido] = useMutation(ACTUALIZAR_PEDIDO,{
-        refetchQueries: [
-            { query: OBTENER_PEDIDOS },
-            'obtenerPedidosVendedor'
-        ]
-    })
+    const [actualizarPedido] = useMutation(ACTUALIZAR_PEDIDO)
     const [eliminarPedido] = useMutation(ELIMINAR_PEDIDO, {
         refetchQueries: [
             { query: OBTENER_PEDIDOS },
