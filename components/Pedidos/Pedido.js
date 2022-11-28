@@ -145,7 +145,6 @@ const Pedido = ({ pedido }) => {
 
                     <option value='EN_ENVIO'>EN_ENVIO</option>
                     <option value='PENDIENTE'>PENDIENTE</option>
-                    <option value='PENDIENTE'>PENDIENTE</option>
                     <option value='COMPLETADO'>COMPLETADO</option>
                     <option value='CANCELADO'>CANCELADO</option>
                 </select>
