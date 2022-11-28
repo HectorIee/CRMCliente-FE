@@ -27,7 +27,10 @@ query obtenerPedidosVendedor {
 
 const Pedido = ({ pedido }) => {
 
-    const { id, total, cliente: { nombre, apellido, telefono, email }, estatus, cliente } = pedido;
+    const { id, total, estatus, cliente } = pedido;
+
+    if(!cliente) return null;
+    const { nombre, apellido, telefono, email} = cliente;
 
     // Mutation para cambiar el estatus de un pedido
     const [actualizarPedido] = useMutation(ACTUALIZAR_PEDIDO)
@@ -139,6 +142,9 @@ const Pedido = ({ pedido }) => {
                     value={estatusPedido}
                     onChange={e => cambiarEstatusPedido(e.target.value)}
                 > 
+
+                    <option value='EN_ENVIO'>EN_ENVIO</option>
+                    <option value='PENDIENTE'>PENDIENTE</option>
                     <option value='PENDIENTE'>PENDIENTE</option>
                     <option value='COMPLETADO'>COMPLETADO</option>
                     <option value='CANCELADO'>CANCELADO</option>
@@ -150,7 +156,7 @@ const Pedido = ({ pedido }) => {
                 {pedido.pedido.map(articulo => (
                     <div key={articulo.id} className='mt-4'>
                         <p className='text-sm text-gray-600'>Producto: {articulo.nombre} </p>
-                        <p className='text-sm text-gray-600'>cantidad: {articulo.cantidad} </p>
+                        <p className='text-sm text-gray-600'>Cantidad: {articulo.cantidad} </p>
                     </div>
                 ))}
 

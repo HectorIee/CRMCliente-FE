@@ -32,8 +32,12 @@ const PedidoState = ({ children }) => {
 
     // Modifica los productos
     const agregarProducto = productosSeleccionados => {
-
         let nuevoState;
+
+        if(!productosSeleccionados){
+            productosSeleccionados = [];
+        }
+
         if (state.productos.length > 0) {
             // tomar el segundo arreglo, una copia para asignarlo al primero 
             nuevoState = productosSeleccionados.map(producto => {
