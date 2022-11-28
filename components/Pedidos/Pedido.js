@@ -163,7 +163,7 @@ const Pedido = ({ pedido }) => {
                     <span className='font-light'> $ {total}</span>
                 </p>
                 <button className='uppercase text-xs font-bold flex items-center mt-4 bg-red-800 px-5 py-2 text-white rounded leading-tight'
-                    onClick={() => confirmarEliminarPedido(id)}
+                    onClick={() => confirmarEliminarPedido()}
                 >
                     Eliminar Pedido
                     <span className="material-symbols-outlined px-2"> delete </span>
