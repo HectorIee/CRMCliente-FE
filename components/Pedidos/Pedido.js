@@ -5,7 +5,7 @@ import Swal from 'sweetalert2'
 const ACTUALIZAR_PEDIDO = gql`
     mutation ActualizarPedido($input: PedidoInput, $id: ID!) {
         actualizarPedido(input: $input, id: $id) {
-            estatus
+            estado
             id
   }
 }
@@ -30,14 +30,13 @@ const Pedido = ({ pedido }) => {
     const { id, total, estatus, cliente } = pedido;
 
     if(!cliente) return null;
-    const { nombre, apellido, telefono, email} = cliente;
+    const {nombre, apellido, telefono, email} = cliente;
 
-    // Mutation para cambiar el estatus de un pedido
+    // Mutation para cambiar el estado de un pedido
     const [actualizarPedido] = useMutation(ACTUALIZAR_PEDIDO)
     const [eliminarPedido] = useMutation(ELIMINAR_PEDIDO, {
         refetchQueries: [
             { query: OBTENER_PEDIDOS },
-            'obtenerPedidosVendedor'
         ]
     });
 
@@ -57,11 +56,11 @@ const Pedido = ({ pedido }) => {
     const clasePedido = () => {
         if (estatusPedido === 'PENDIENTE') {
             setClase('border-orange-500')
-        } else if (estatusPedido === 'EN_ENVIO') {
-            setClase('border-yellow-500')
         } else if (estatusPedido === 'COMPLETADO') {
             setClase('border-green-500')
-        } else {
+        } else if(estatusPedido === 'EN_ENVIO'){
+            setClase('border-yellow-500')
+        }else {
             setClase('border-red-800')
         }
     }
@@ -118,34 +117,36 @@ const Pedido = ({ pedido }) => {
     }
 
     return (
-        <div className={` ${clase} border-l-8 mt-4 bg-white rounded p-6 md:grid md:grid-cols-2 md:gap-4 shadow-lg`}>
+        <div className={` ${clase} border-t-4 mt-4 bg-white rounded p-6 md:grid md:grid-cols-2 md:gap-4 shadow-lg`}>
             <div>
                 <p className='font-bold text-gray-800'>Cliente: {nombre} {apellido}</p>
 
                 {email && (
                     <p className='flex items-center my-2'>
-                        <span className="material-symbols-outlined px-2"> email </span>
+                        <span className="material-symbols-outlined px-2">
+                            email
+                        </span>
                         {email}
                     </p>
                 )}
 
                 {telefono && (
                     <p className='flex items-center my-2'>
-                        <span className="material-symbols-outlined px-2"> phone </span>
+                        <span className="material-symbols-outlined px-2">
+                            phone
+                        </span>
                         {telefono}
                     </p>
                 )}
 
-                <h2 className='text-gray-800 font-bold mt-10'>Estatus Pedido: {estatus}</h2>
+                <h2 className='text-gray-800 font-bold mt-10'>Estado Pedido: {estatus}</h2>
                 <select
                     className='mt-2 appearance-none bg-blue-600 border border-blue-600 text-white p-2 text-center rounded leading-tight focus:oultine-none focus:bg-blue-600 focus:border-blue-500 uppercase text-xs font-bold'
-                    value={estatusPedido}
+                    value={estadoPedido}
                     onChange={e => cambiarEstatusPedido(e.target.value)}
-                > 
-
-                    <option value='EN_ENVIO'>EN_ENVIO</option>
-                    <option value='PENDIENTE'>PENDIENTE</option>
+                >
                     <option value='COMPLETADO'>COMPLETADO</option>
+                    <option value='PENDIENTE'>PENDIENTE</option>
                     <option value='CANCELADO'>CANCELADO</option>
                 </select>
             </div>
@@ -155,18 +156,21 @@ const Pedido = ({ pedido }) => {
                 {pedido.pedido.map(articulo => (
                     <div key={articulo.id} className='mt-4'>
                         <p className='text-sm text-gray-600'>Producto: {articulo.nombre} </p>
-                        <p className='text-sm text-gray-600'>Cantidad: {articulo.cantidad} </p>
+                        <p className='text-sm text-gray-600'>cantidad: {articulo.cantidad} </p>
                     </div>
                 ))}
 
                 <p className='text-gray-800 mt-3 font-bold'>Total a pagar:
                     <span className='font-light'> $ {total}</span>
                 </p>
-                <button className='uppercase text-xs font-bold flex items-center mt-4 bg-red-800 px-5 py-2 text-white rounded leading-tight'
+                <button
+                    className='uppercase text-xs font-bold flex items-center mt-4 bg-red-800 px-5 py-2 text-white rounded leading-tight'
                     onClick={() => confirmarEliminarPedido()}
                 >
                     Eliminar Pedido
-                    <span className="material-symbols-outlined px-2"> delete </span>
+                    <span className="material-symbols-outlined px-2">
+                        delete
+                    </span>
                 </button>
             </div>
         </div>
