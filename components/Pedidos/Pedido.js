@@ -5,7 +5,7 @@ import Swal from 'sweetalert2'
 const ACTUALIZAR_PEDIDO = gql`
     mutation ActualizarPedido($input: PedidoInput, $id: ID!) {
         actualizarPedido(input: $input, id: $id) {
-            estado
+            estatus
             id
   }
 }
@@ -37,10 +37,11 @@ const Pedido = ({ pedido }) => {
     const [eliminarPedido] = useMutation(ELIMINAR_PEDIDO, {
         refetchQueries: [
             { query: OBTENER_PEDIDOS },
+            'obtenerPedidosVendedor'
         ]
     });
 
-    console.log(pedido)
+    console.log(pedido);
 
     const [estatusPedido, setEstatusPedido] = useState(estatus);
     const [clase, setClase] = useState('');
