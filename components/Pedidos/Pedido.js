@@ -146,6 +146,7 @@ const Pedido = ({ pedido }) => {
                     onChange={e => cambiarEstatusPedido(e.target.value)}
                 >
                     <option value='COMPLETADO'>COMPLETADO</option>
+                    <option value='EN_ENVIO'>EN_ENVIO</option>
                     <option value='PENDIENTE'>PENDIENTE</option>
                     <option value='CANCELADO'>CANCELADO</option>
                 </select>
