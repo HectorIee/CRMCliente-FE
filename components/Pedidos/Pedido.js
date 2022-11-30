@@ -142,7 +142,7 @@ const Pedido = ({ pedido }) => {
                 <h2 className='text-gray-800 font-bold mt-10'>Estado Pedido: {estatus}</h2>
                 <select
                     className='mt-2 appearance-none bg-blue-600 border border-blue-600 text-white p-2 text-center rounded leading-tight focus:oultine-none focus:bg-blue-600 focus:border-blue-500 uppercase text-xs font-bold'
-                    value={estadoPedido}
+                    value={estatusPedido}
                     onChange={e => cambiarEstatusPedido(e.target.value)}
                 >
                     <option value='COMPLETADO'>COMPLETADO</option>
