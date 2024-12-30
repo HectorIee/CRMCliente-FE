@@ -12,7 +12,7 @@
     "@apollo/client": "^3.7.1",
     "apollo-link-context": "^1.0.20",
     "formik": "^2.2.9",
-    "next": "13.0.4",
+    "next": "13.5.8",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-select": "^5.6.1",
@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.13",
-    "postcss": "^8.4.19",
+    "postcss": "^8.4.31",
     "tailwindcss": "^3.2.4"
   }
 }
